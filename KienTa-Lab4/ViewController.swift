@@ -63,28 +63,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
         
         let index = indexPath.section * numRow + indexPath.row
-        if(theData.count > index) {
+        if(theData.count > index && theImageCache.count > index) {
 //            print(index)
             let title = theData[index].title
             let image = theImageCache[index]
             cell.backgroundView = createMovieView(collectionView, title, image)
         }
-        
-        
-//        if(index % 2 == 1){
-//            cell.backgroundColor = UIColor.blue
-//        } else {
-//            cell.backgroundColor = UIColor.red
-//        }
-        /*
-         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-               cell.textLabel!.text = theData[indexPath.row].name
-               cell.imageView?.image = theImageCache[indexPath.row]
-               
-               return cell
-         */
-        
-        return cell
+    return cell
         
     }
     
@@ -95,48 +80,72 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func fetchMoviesForCollectionView(_ query: String) {
-        let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb&query=" + query)
-        do{
-            let data = try Data(contentsOf: url!)
-            let tempData = try JSONDecoder().decode(APIResults.self, from:data)
-            theData = tempData.results
-//            print("the data is \(String(describing: theData))")
-            for i in 0..<theData.count{
-                if i == theData.count{
-                    break
-                }
-//                print(String(i) + " " + String(theData.count))
-                let data = theData[i]
-                if data.poster_path == nil{
-                    theData.remove(at: i)
+        let scheme = "https"
+        let host = "api.themoviedb.org"
+        let path = "/3/search/movie"
+        let queryItem1 = URLQueryItem(name: "api_key", value: "2597d4a74591834f2d63dbe73d13d4fb")
+        let queryItem2 = URLQueryItem(name: "query", value: query)
+
+
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem1, queryItem2]
+
+        if let url = urlComponents.url {
+            print(url)
+            do{
+                let data = try Data(contentsOf: url)
+                let tempData = try JSONDecoder().decode(APIResults.self, from:data)
+                theData = tempData.results
+    //            print("the data is \(String(describing: theData))")
+                for i in 0..<theData.count{
+                    if i == theData.count{
+                        break
+                    }
+    //                print(String(i) + " " + String(theData.count))
+                    let data = theData[i]
+                    if data.poster_path == nil{
+                        theData.remove(at: i)
+                    }
                 }
             }
+            catch{
+                theData = []
+                print("Data not found")
+            }
         }
-        catch{
-            theData = []
-            print("Data not found")
-        }
+        
+//        let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb&query=" + query)
+
         
         
     }
    
     //detect change in search bar
-    var query: String?
-    var timer = Timer()
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-                if let query = searchBar.text{
-//                    print(query)
-                    fetchMoviesForCollectionView(query)
-                    movieCollectionView.reloadData()
-                    cacheImages()
-                }
+                
 //        print(theImageCache)
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    @IBAction func searchPressed(_ sender: UIButton) {
+        if let query = movieQuery.text{
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.fetchMoviesForCollectionView(query)
+                self.cacheImages()
+                DispatchQueue.main.async {
+                    self.movieCollectionView.reloadData()
+                }
+            }
+            
+        }
     }
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
