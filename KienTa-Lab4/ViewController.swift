@@ -76,6 +76,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
+    //send data to user
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailedVC = DetailedViewController()
         let index = indexPath.section * numRow + indexPath.row
@@ -87,6 +88,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         detailedVC.score = index < theData.count ? theData[index].vote_average : nil
         detailedVC.date = index < theData.count ? theData[index].release_date : nil
         detailedVC.numRate = index < theData.count ? theData[index].vote_count : nil
+        detailedVC.id = index < theData.count ? theData[index].id : nil
         
         navigationController?.pushViewController(detailedVC, animated: true)
     }

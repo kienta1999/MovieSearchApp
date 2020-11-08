@@ -8,6 +8,7 @@
 
 import UIKit
 
+//view detail of movies
 class DetailedViewController: UIViewController {
 
     var image: UIImage!
@@ -15,6 +16,7 @@ class DetailedViewController: UIViewController {
     var score: Double!
     var date: String!
     var numRate: Int!
+    var id: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,9 +71,23 @@ class DetailedViewController: UIViewController {
 
         self.view.addSubview(addFav)
     }
-    
+    favMoviesClone
     @objc func addFavClicked(){
         print("fav clicked")
+        
+        if UserDefaults.standard.array(forKey: self.key) == nil{
+            UserDefaults.standard.set([], forKey: self.key)
+        }
+        var favMoviesClone:[String] = UserDefaults.standard.array(forKey: self.key)! as? [String] ?? []
+        if(favMoviesClone.contains(self.imageName!)){
+            print("duplicate!")
+            print(favMoviesClone)
+            return
+        }
+        favMoviesClone.append(self.imageName!)
+        UserDefaults.standard.set(favMoviesClone, forKey: self.key)
+        print(favMoviesClone)
+        
     }
     /*
     // MARK: - Navigation
