@@ -86,6 +86,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         detailedVC.imageName = index < theData.count ? theData[index].title : nil
         detailedVC.score = index < theData.count ? theData[index].vote_average : nil
         detailedVC.date = index < theData.count ? theData[index].release_date : nil
+        detailedVC.numRate = index < theData.count ? theData[index].vote_count : nil
         
         navigationController?.pushViewController(detailedVC, animated: true)
     }

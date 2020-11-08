@@ -14,7 +14,7 @@ class DetailedViewController: UIViewController {
     var imageName: String!
     var score: Double!
     var date: String!
-    
+    var numRate: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,13 @@ class DetailedViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
         
-        if(imageName == nil || score == nil || date == nil || image == nil){
+        if(imageName == nil || score == nil || date == nil || image == nil || numRate == nil){
             navigationController?.popViewController(animated: false)
             return
         }
+        let imageRatio = CGFloat(2)
         
-        let theImageFrame = CGRect(x: view.frame.midX - image.size.width/1.5 / 2, y: 100, width: image.size.width / 1.5, height: image.size.height / 1.5)
+        let theImageFrame = CGRect(x: view.frame.midX - image.size.width / imageRatio / 2 , y: 100, width: image.size.width / imageRatio, height: image.size.height / imageRatio)
 
         let imageView = UIImageView(frame: theImageFrame)
         imageView.image = image
@@ -35,28 +36,43 @@ class DetailedViewController: UIViewController {
         view.addSubview(imageView)
         
         
-        let theTextFrame = CGRect(x: 0, y: image.size.height / 1.5 + 110, width: view.frame.width, height: 30)
+        let theTextFrame = CGRect(x: 0, y: image.size.height / imageRatio + 110, width: view.frame.width, height: 30)
         let textView = UILabel(frame: theTextFrame)
         textView.text = "Title: " + imageName
         textView.textAlignment = .center
         view.addSubview(textView)
         
-        let theScoreFrame = CGRect(x: 0, y: image.size.height / 1.5 + 140, width: view.frame.width, height: 30)
+        let theScoreFrame = CGRect(x: 0, y: image.size.height / imageRatio + 140, width: view.frame.width, height: 30)
         let scoreView = UILabel(frame: theScoreFrame)
         scoreView.text = "Score: " + String(score)
         scoreView.textAlignment = .center
         view.addSubview(scoreView)
         
-        let theDateFrame = CGRect(x: 0, y: image.size.height / 1.5 + 170, width: view.frame.width, height: 30)
+        let theDateFrame = CGRect(x: 0, y: image.size.height / imageRatio + 170, width: view.frame.width, height: 30)
         let dateView = UILabel(frame: theDateFrame)
         dateView.text = "Date released: " + String(date)
         dateView.textAlignment = .center
         view.addSubview(dateView)
         
+        let numRateFrame = CGRect(x: 0, y: image.size.height / imageRatio + 200, width: view.frame.width, height: 30)
+        let numRateView = UILabel(frame: numRateFrame)
+        numRateView.text = "Number of rating: " + String(numRate)
+        numRateView.textAlignment = .center
+        view.addSubview(numRateView)
         
+        let addFavFrame = CGRect(x: view.frame.width / 4, y: image.size.height / imageRatio + 230, width: view.frame.width / 2, height: 30)
+        let addFav = UIButton(frame: addFavFrame)
+        addFav.backgroundColor = .yellow
+        addFav.setTitle("Test Button", for: .normal)
+        addFav.setTitleColor(.black, for: .normal)
+        addFav.addTarget(self, action: #selector(addFavClicked), for: .touchUpInside)
+
+        self.view.addSubview(addFav)
     }
     
-
+    @objc func addFavClicked(){
+        print("fav clicked")
+    }
     /*
     // MARK: - Navigation
 
