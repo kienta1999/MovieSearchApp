@@ -18,6 +18,8 @@ class DetailedViewController: UIViewController {
     var numRate: Int!
     var id: Int!
     
+    let key = "favouriteMovies"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,9 +71,9 @@ class DetailedViewController: UIViewController {
         addFav.setTitleColor(.black, for: .normal)
         addFav.addTarget(self, action: #selector(addFavClicked), for: .touchUpInside)
 
-        self.view.addSubview(addFav)
+        view.addSubview(addFav)
     }
-    favMoviesClone
+    
     @objc func addFavClicked(){
         print("fav clicked")
         
