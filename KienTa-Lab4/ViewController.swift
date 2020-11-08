@@ -195,7 +195,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     
 
 

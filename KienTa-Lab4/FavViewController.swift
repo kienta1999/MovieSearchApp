@@ -38,11 +38,27 @@ class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         favMoviesClone = UserDefaults.standard.array(forKey: "favouriteMovies")! as? [String] ?? []
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let title = tableView.cellForRow(at: indexPath)?.textLabel!.text
+            for i in 0 ..< self.favMoviesClone.count {
+                if(self.favMoviesClone[i] == title){
+                    self.favMoviesClone.remove(at: i)
+                    UserDefaults.standard.set(favMoviesClone, forKey: self.key)
+                    break
+                }
+            }
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         favouriteMoviesTable.register(UITableViewCell.self, forCellReuseIdentifier: "theCell")
         favouriteMoviesTable.dataSource = self
+        favouriteMoviesTable.delegate = self
 
         // Do any additional setup after loading the view.
         
