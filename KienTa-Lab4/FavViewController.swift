@@ -8,13 +8,33 @@
 
 import UIKit
 
-class FavViewController: UIViewController {
+class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let key = "favouriteMovies"
+    var favMoviesClone:[String] = UserDefaults.standard.array(forKey: "favouriteMovies")! as? [String] ?? []
+    
+    
+    @IBOutlet weak var favouriteMoviesTable: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favMoviesClone.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "theCell")! as UITableViewCell
+        
+        
+        myCell.textLabel!.text = favMoviesClone[indexPath.row]
+        
+        return myCell
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        favouriteMoviesTable.register(UITableViewCell.self, forCellReuseIdentifier: "theCell")
+        favouriteMoviesTable.dataSource = self
 
         // Do any additional setup after loading the view.
     }

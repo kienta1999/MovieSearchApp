@@ -120,6 +120,9 @@
                         <viewLayoutGuide key="safeArea" id="cf8-Ja-Kef"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="wXw-Es-TVC"/>
+                    <connections>
+                        <outlet property="favouriteMoviesTable" destination="QUD-gi-XET" id="Cnd-U1-vhw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jan-92-wve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -67,7 +67,7 @@ class DetailedViewController: UIViewController {
         let addFavFrame = CGRect(x: view.frame.width / 4, y: image.size.height / imageRatio + 230, width: view.frame.width / 2, height: 30)
         let addFav = UIButton(frame: addFavFrame)
         addFav.backgroundColor = .yellow
-        addFav.setTitle("Test Button", for: .normal)
+        addFav.setTitle("Add to Favourite", for: .normal)
         addFav.setTitleColor(.black, for: .normal)
         addFav.addTarget(self, action: #selector(addFavClicked), for: .touchUpInside)
 
