@@ -30,8 +30,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var theData: [Movie] = []
     var theImageCache: [UIImage] = []
     
-    let numRow = 3
-    let numCol = 7
+    let numRow = 2
+    let numCol = 10
 
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
@@ -79,22 +79,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailedVC = DetailedViewController()
         let index = indexPath.section * numRow + indexPath.row
-        detailedVC.image = theImageCache[index]
-        detailedVC.imageName = theData[index].title
-        detailedVC.score = theData[index].vote_average
-        detailedVC.date = theData[index].release_date
+        if(index >= theData.count){
+            return
+        }
+        detailedVC.image = index < theData.count ? theImageCache[index] : nil
+        detailedVC.imageName = index < theData.count ? theData[index].title : nil
+        detailedVC.score = index < theData.count ? theData[index].vote_average : nil
+        detailedVC.date = index < theData.count ? theData[index].release_date : nil
         
         navigationController?.pushViewController(detailedVC, animated: true)
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           
-           print("in here")
-
-           
-           
-           
-           
-       }
     
     func setupCollectionView(){
         movieCollectionView.dataSource = self
@@ -125,16 +119,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 let tempData = try JSONDecoder().decode(APIResults.self, from:data)
                 theData = tempData.results
     //            print("the data is \(String(describing: theData))")
-                for i in 0..<theData.count{
-                    if i == theData.count{
-                        break
-                    }
-    //                print(String(i) + " " + String(theData.count))
-                    let data = theData[i]
-                    if data.poster_path == nil{
-                        theData.remove(at: i)
-                    }
-                }
+//                for i in 0..<theData.count{
+//                    print(i)
+//                    if i == theData.count{
+//                        break
+//                    }
+//    //                print(String(i) + " " + String(theData.count))
+//                    let data = theData[i]
+//                    if data.poster_path == nil{
+//                        theData.remove(at: i)
+//                    }
+//                }
             }
             catch{
                 theData = []
@@ -142,7 +137,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         }
         
-//        let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb&query=" + query)
 
         
         

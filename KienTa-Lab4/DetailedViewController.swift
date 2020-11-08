@@ -22,6 +22,11 @@ class DetailedViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
         
+        if(imageName == nil || score == nil || date == nil || image == nil){
+            navigationController?.popViewController(animated: false)
+            return
+        }
+        
         let theImageFrame = CGRect(x: view.frame.midX - image.size.width/1.5 / 2, y: 100, width: image.size.width / 1.5, height: image.size.height / 1.5)
 
         let imageView = UIImageView(frame: theImageFrame)
