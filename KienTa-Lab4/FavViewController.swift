@@ -11,7 +11,11 @@ import UIKit
 class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let key = "favouriteMovies"
-    var favMoviesClone:[String] = UserDefaults.standard.array(forKey: "favouriteMovies")! as? [String] ?? []
+    var favMoviesClone:[String] = UserDefaults.standard.array(forKey: "favouriteMovies")! as? [String] ?? []{
+        didSet{
+            favouriteMoviesTable.reloadData()
+        }
+    }
     
     
     @IBOutlet weak var favouriteMoviesTable: UITableView!
@@ -30,6 +34,10 @@ class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        favMoviesClone = UserDefaults.standard.array(forKey: "favouriteMovies")! as? [String] ?? []
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +45,7 @@ class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         favouriteMoviesTable.dataSource = self
 
         // Do any additional setup after loading the view.
+        
     }
     
 
