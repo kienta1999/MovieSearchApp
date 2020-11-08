@@ -81,6 +81,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let index = indexPath.section * numRow + indexPath.row
         detailedVC.image = theImageCache[index]
         detailedVC.imageName = theData[index].title
+        detailedVC.score = theData[index].vote_average
+        detailedVC.date = theData[index].release_date
         
         navigationController?.pushViewController(detailedVC, animated: true)
     }

@@ -12,6 +12,8 @@ class DetailedViewController: UIViewController {
 
     var image: UIImage!
     var imageName: String!
+    var score: Double!
+    var date: String!
     
     
     override func viewDidLoad() {
@@ -30,9 +32,23 @@ class DetailedViewController: UIViewController {
         
         let theTextFrame = CGRect(x: 0, y: image.size.height / 1.5 + 110, width: view.frame.width, height: 30)
         let textView = UILabel(frame: theTextFrame)
-        textView.text = imageName
+        textView.text = "Title: " + imageName
         textView.textAlignment = .center
         view.addSubview(textView)
+        
+        let theScoreFrame = CGRect(x: 0, y: image.size.height / 1.5 + 140, width: view.frame.width, height: 30)
+        let scoreView = UILabel(frame: theScoreFrame)
+        scoreView.text = "Score: " + String(score)
+        scoreView.textAlignment = .center
+        view.addSubview(scoreView)
+        
+        let theDateFrame = CGRect(x: 0, y: image.size.height / 1.5 + 170, width: view.frame.width, height: 30)
+        let dateView = UILabel(frame: theDateFrame)
+        dateView.text = "Date released: " + String(date)
+        dateView.textAlignment = .center
+        view.addSubview(dateView)
+        
+        
     }
     
 
