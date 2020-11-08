@@ -69,9 +69,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             let image = theImageCache[index]
             cell.backgroundView = createMovieView(collectionView, title, image)
         }
+        else{
+            cell.backgroundView = nil
+        }
     return cell
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailedVC = DetailedViewController()
+        let index = indexPath.section * numRow + indexPath.row
+        detailedVC.image = theImageCache[index]
+        detailedVC.imageName = theData[index].title
+        
+        navigationController?.pushViewController(detailedVC, animated: true)
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           
+           print("in here")
+
+           
+           
+           
+           
+       }
     
     func setupCollectionView(){
         movieCollectionView.dataSource = self
@@ -85,13 +106,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let path = "/3/search/movie"
         let queryItem1 = URLQueryItem(name: "api_key", value: "2597d4a74591834f2d63dbe73d13d4fb")
         let queryItem2 = URLQueryItem(name: "query", value: query)
+        let queryItem3 = URLQueryItem(name: "sort_by", value: "popularity.desc")
+        let queryItem4 = URLQueryItem(name: "page", value: "1") // 2 3 for more movies
 
 
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
-        urlComponents.queryItems = [queryItem1, queryItem2]
+        urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
 
         if let url = urlComponents.url {
             print(url)
@@ -163,7 +186,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //        print(theData)
         for item in theData {
             if let path = item.poster_path{
-                let url = URL(string: "https://image.tmdb.org/t/p/w1280" + path)
+                let url = URL(string: "https://image.tmdb.org/t/p/w500" + path)
 //                print(url!)
                 let data = try? Data(contentsOf: url!)
                 let image = UIImage(data: data!)
