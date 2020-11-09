@@ -51,12 +51,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return numCol;
     }
     
-    func createMovieView(_ collectionView: UICollectionView, _ title: String, _ image: UIImage) -> UIImageView{
-        let movieViewFrame = CGRect.init(x: collectionView.frame.minX, y: collectionView.frame.minY, width: image.accessibilityFrame.width, height: image.accessibilityFrame.height)
-        let imageView: UIImageView = UIImageView(image: image)
-        imageView.frame = movieViewFrame
-        return imageView
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -67,7 +61,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //            print(index)
             let title = theData[index].title
             let image = theImageCache[index]
-            cell.backgroundView = createMovieView(collectionView, title, image)
+            
+            let wrapperFrame = CGRect(x: collectionView.frame.minX, y: collectionView.frame.minY, width: collectionView.frame.width, height: collectionView.frame.height)
+            let wrapperView = UIView(frame: wrapperFrame)
+            cell.backgroundView = wrapperView
+            
+            let imageFrame = CGRect(x: wrapperView.frame.minX, y: wrapperView.frame.minY, width: wrapperView.frame.width, height: wrapperView.frame.height)
+            let imageView: UIImageView = UIImageView(image: image)
+            imageView.frame = imageFrame
+            wrapperView.addSubview(imageView)
+            
+           let titleHeight = CGFloat(40)
+            let titleFrame = CGRect(x: imageFrame.minX, y: imageFrame.maxY - titleHeight, width: imageFrame.width, height: titleHeight)
+            let movieTitle = UITextView(frame: titleFrame)
+            movieTitle.text = title
+            movieTitle.textColor = .white
+            movieTitle.textAlignment = .center
+            movieTitle.backgroundColor = .gray
+            imageView.addSubview(movieTitle)
+            
+            
+            
         }
         else{
             cell.backgroundView = nil
