@@ -155,13 +155,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
    
     //detect change in search bar
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-                
-//        print(theImageCache)
-    }
-    
-    
-    @IBAction func searchPressed(_ sender: UIButton) {
+    func searchInvoked(){
         if let query = movieQuery.text{
             clearImageAndData()
             DispatchQueue.global(qos: .userInitiated).async {
@@ -174,6 +168,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
             
         }
+    }
+    
+    @IBAction func searchPressed(_ sender: UIButton) {
+        searchInvoked()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchInvoked()
     }
     
     func clearImageAndData(){
