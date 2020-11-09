@@ -168,6 +168,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 self.cacheImages()
                 DispatchQueue.main.async {
                     self.movieCollectionView.reloadData()
+                    print(self.theImageCache.count)
                 }
             }
             
@@ -180,16 +181,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         movieCollectionView.reloadData()
     }
     
-    
-    /*
-
-             for _ in 0 ..< 20 {
-                 theImageCache.append(UIImage(named: "Loading")!)
-                 theData.append(Movie(id: nil, poster_path: nil, title: "Loading", release_date: "", vote_average: 0, overview: "", vote_count: nil))
-             }
-     //        print(theImageCache)
-             movieCollectionView.reloadData()
-     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,6 +203,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 let image = UIImage(data: data!)
                 theImageCache.append(image!)
             }
+            else{
+                let notFound = UIImage(named : "img_not_found")!
+                theImageCache.append(notFound)
+            }
+            
             
         }
     }
