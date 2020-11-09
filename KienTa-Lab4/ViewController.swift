@@ -204,24 +204,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBAction func searchPressed(_ sender: UIButton) {
         pageNum = 1
         pageNumLabel.text = "1"
-        if movieQuery.text == nil || movieQuery.text == "" {
-            print("here")
-            fetchDefaultMovies()
-        }
-        else{
-            searchInvoked()
-        }
+        searchInvoked()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         pageNum = 1
         pageNumLabel.text = "1"
+        searchInvoked()
         if movieQuery.text == nil || movieQuery.text == "" {
-            print("here")
-            fetchDefaultMovies()
-        }
-        else{
-            searchInvoked()
+            
         }
     }
     
