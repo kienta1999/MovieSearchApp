@@ -94,6 +94,12 @@ class DetailedViewController: UIViewController {
 //        print(favMoviesClone)
         
     }
+    
+    func fetchMoreInfor(){
+        if(id != nil){
+            
+        }
+    }
     /*
     // MARK: - Navigation
 

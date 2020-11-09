@@ -34,9 +34,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let numRow = 2
     var numCol = 10
     let maxNumCol = 10
-    var loading = false
     var pageNum = 1
     var totalPageNum: Int!
+    var isDefaultMovies = true
     
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
         
         let index = indexPath.section * numRow + indexPath.row
-        if theData.count == 0 && loading{
+        if theData.count == 0 {
             let spinner = UIActivityIndicatorView(style: .large)
             spinner.hidesWhenStopped = true
             cell.backgroundView = spinner
@@ -122,7 +122,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         movieCollectionView.delegate = self
         movieCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
     }
-    
     func fetchMoviesForCollectionView(_ query: String, _ pageNum: Int) {
         let scheme = "https"
         let host = "api.themoviedb.org"
@@ -182,11 +181,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         theData = []
         numCol = maxNumCol
         movieCollectionView.reloadData()
-        loading = true
     }
     
     //detect change in search bar
     func searchInvoked(){
+        isDefaultMovies = false
         if let query = movieQuery.text{
             clearImageAndData()
             DispatchQueue.global(qos: .userInitiated).async {
@@ -201,16 +200,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    
     @IBAction func searchPressed(_ sender: UIButton) {
         pageNum = 1
         pageNumLabel.text = "1"
-        searchInvoked()
+        if movieQuery.text == nil || movieQuery.text == "" {
+            print("here")
+            fetchDefaultMovies()
+        }
+        else{
+            searchInvoked()
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         pageNum = 1
         pageNumLabel.text = "1"
-        searchInvoked()
+        if movieQuery.text == nil || movieQuery.text == "" {
+            print("here")
+            fetchDefaultMovies()
+        }
+        else{
+            searchInvoked()
+        }
     }
     
     func isValidPageNum(_ page: Int) -> Bool{
@@ -224,10 +236,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if isValidPageNum(pageNum + 1) {
             pageNum += 1
             //not the initial page
-            if(loading){
-                searchInvoked()
-                pageNumLabel.text = String(pageNum)
+            if isDefaultMovies {
+                fetchDefaultMovies()
             }
+            else{
+                searchInvoked()
+            }
+            pageNumLabel.text = String(pageNum)
+            
         }
     }
     
@@ -236,21 +252,41 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if isValidPageNum(pageNum - 1) {
             pageNum -= 1
             //not the initial page
-            if(loading){
-                searchInvoked()
-                pageNumLabel.text = String(pageNum)
-            }
+             if isDefaultMovies {
+               fetchDefaultMovies()
+           }
+           else{
+               searchInvoked()
+           }
+            pageNumLabel.text = String(pageNum)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        fetchDefaultMovies()
         movieQuery.delegate = self
         
     }
     
 
+    func fetchDefaultMovies(){
+        clearImageAndData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb&page=\(self.pageNum)&vote_count.gte=10000")
+            let data = try? Data(contentsOf: url!)
+            let tempData = try! JSONDecoder().decode(APIResults.self, from:data!)
+            self.totalPageNum = tempData.total_pages
+            self.theData = tempData.results
+            self.cacheImages()
+            DispatchQueue.main.async {
+                self.numCol = (self.theData.count + 1) / self.numRow
+                self.movieCollectionView.reloadData()
+            }
+        }
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         
