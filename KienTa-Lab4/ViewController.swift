@@ -104,7 +104,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailedVC = DetailedViewController()
         let index = indexPath.section * numRow + indexPath.row
-        if(index >= theData.count){
+        if(index >= theData.count || theData.count == 0){
             return
         }
         detailedVC.image = index < theData.count ? theImageCache[index] : nil

@@ -16,7 +16,8 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
 
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
-
+    @IBOutlet weak var pageNumLabel: UILabel!
+    
     /*
      https://api.themoviedb.org/3/discover/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb/sort_by=...
      */
@@ -96,6 +97,25 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
     {
         return CGSize(width: view.frame.width / CGFloat(numRow) - 10, height: 200.0)
     }
+    
+    //send data to user
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailedVC = DetailedViewController()
+        let index = indexPath.section * numRow + indexPath.row
+        if(index >= theData.count){
+            return
+        }
+        print(indexPath.section)
+        detailedVC.image = index < theData.count ? theImageCache[index] : nil
+        detailedVC.imageName = index < theData.count ? theData[index].title : nil
+        detailedVC.score = index < theData.count ? theData[index].vote_average : nil
+        detailedVC.date = index < theData.count ? theData[index].release_date : nil
+        detailedVC.numRate = index < theData.count ? theData[index].vote_count : nil
+        detailedVC.id = index < theData.count ? theData[index].id : nil
+        
+        navigationController?.pushViewController(detailedVC, animated: true)
+    }
+    
     
     func setupCollectionView(){
             movieCollectionView.dataSource = self
@@ -200,6 +220,26 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
         searchInvoked()
     }
     
+    
+    @IBAction func nextPage(_ sender: UIButton) {
+        pageNum += 1
+        if(loading){
+            searchInvoked()
+            pageNumLabel.text = String(pageNum)
+        }
+    }
+    
+    
+    @IBAction func previousPage(_ sender: UIButton) {
+        if pageNum > 1 {
+            pageNum -= 1
+            //not the initial page
+            if(loading){
+                searchInvoked()
+                pageNumLabel.text = String(pageNum)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -27,7 +27,7 @@ class DetailedViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         if(imageName == nil || score == nil || date == nil || image == nil || numRate == nil){
-            navigationController?.popViewController(animated: false)
+            navigationController?.popViewController(animated: true)
             return
         }
         let imageRatio = CGFloat(2)
