@@ -18,9 +18,9 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
     
     @IBOutlet weak var pageNumLabel: UILabel!
     
-    /*
-     https://api.themoviedb.org/3/discover/movie?api_key=2597d4a74591834f2d63dbe73d13d4fb/sort_by=...
-     */
+    @IBOutlet weak var minVoteCountTextField: UITextField!
+    
+    
     struct APIResults:Decodable {
         let page: Int
         let total_results: Int
@@ -45,7 +45,7 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
     var loading = false
     var pageNum = 1
     var querySort = "popularity.desc"
-    let minVoteCount = 5000
+    var minVoteCount = 5000
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numRow
@@ -98,7 +98,6 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
         return CGSize(width: view.frame.width / CGFloat(numRow) - 10, height: 200.0)
     }
     
-    //send data to user
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailedVC = DetailedViewController()
         let index = indexPath.section * numRow + indexPath.row
@@ -239,6 +238,19 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
                 pageNumLabel.text = String(pageNum)
             }
         }
+    }
+    
+    
+    @IBAction func changeVoteCount(_ sender: UIButton) {
+        if let temp = minVoteCountTextField.text {
+            let newVoteCount:Int? = Int(temp)
+            if(newVoteCount == nil){
+                return
+            }
+            minVoteCount = newVoteCount!
+            searchInvoked()
+        }
+        
     }
     
     override func viewDidLoad() {
