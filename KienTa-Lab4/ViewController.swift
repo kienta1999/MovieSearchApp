@@ -35,9 +35,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var numCol = 10
     let maxNumCol = 10
     var loading = false
+    var pageNum = 1
+    var totalPageNum: Int!
     
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
+    @IBOutlet weak var pageNumLabel: UILabel!
     
     @IBOutlet weak var movieQuery: UISearchBar!
     
@@ -61,7 +64,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
         
         let index = indexPath.section * numRow + indexPath.row
-        print(theImageCache)
         if theData.count == 0 && loading{
             let spinner = UIActivityIndicatorView(style: .large)
             spinner.hidesWhenStopped = true
@@ -72,7 +74,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //            print(index)
             let title = theData[index].title
             let image = theImageCache[index]
-            print(title + " " + image.description)
+//            print(title + " " + image.description)
             let wrapperFrame = CGRect(x: collectionView.frame.minX, y: collectionView.frame.minY, width: collectionView.frame.width, height: collectionView.frame.height)
             let wrapperView = UIView(frame: wrapperFrame)
             cell.backgroundView = wrapperView
@@ -121,14 +123,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         movieCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
     }
     
-    func fetchMoviesForCollectionView(_ query: String) {
+    func fetchMoviesForCollectionView(_ query: String, _ pageNum: Int) {
         let scheme = "https"
         let host = "api.themoviedb.org"
         let path = "/3/search/movie"
         let queryItem1 = URLQueryItem(name: "api_key", value: "2597d4a74591834f2d63dbe73d13d4fb")
         let queryItem2 = URLQueryItem(name: "query", value: query)
         let queryItem3 = URLQueryItem(name: "sort_by", value: "popularity.desc")
-        let queryItem4 = URLQueryItem(name: "page", value: "1") // 2 3 for more movies
+        let queryItem4 = URLQueryItem(name: "page", value: String(pageNum) ) // 2 3 for more movies
 
 
         var urlComponents = URLComponents()
@@ -143,6 +145,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 theData = []
                 let data = try Data(contentsOf: url)
                 let tempData = try JSONDecoder().decode(APIResults.self, from:data)
+                totalPageNum = tempData.total_pages
                 theData = tempData.results
             }
             catch{
@@ -150,18 +153,41 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 print("Data not found")
             }
         }
-        
-
-        
-        
     }
-   
+       func cacheImages() {
+           theImageCache = []
+   //        print(theData)
+           for item in theData {
+               if let path = item.poster_path{
+                   let url = URL(string: "https://image.tmdb.org/t/p/w500" + path)
+   //                print(url!)
+                   let data = try? Data(contentsOf: url!)
+                   let image = UIImage(data: data!)
+                   theImageCache.append(image!)
+               }
+               else{
+                   let notFound = UIImage(named : "img_not_found")!
+                   theImageCache.append(notFound)
+               }
+               
+               
+           }
+       }
+    
+    func clearImageAndData(){
+        theImageCache = []
+        theData = []
+        numCol = maxNumCol
+        movieCollectionView.reloadData()
+        loading = true
+    }
+    
     //detect change in search bar
     func searchInvoked(){
         if let query = movieQuery.text{
             clearImageAndData()
             DispatchQueue.global(qos: .userInitiated).async {
-                self.fetchMoviesForCollectionView(query)
+                self.fetchMoviesForCollectionView(query, self.pageNum)
                 self.cacheImages()
                 DispatchQueue.main.async {
                     self.numCol = (self.theData.count + 1) / self.numRow
@@ -173,21 +199,46 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
+        pageNum = 1
+        pageNumLabel.text = "1"
         searchInvoked()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        pageNum = 1
+        pageNumLabel.text = "1"
         searchInvoked()
     }
     
-    func clearImageAndData(){
-        theImageCache = []
-        theData = []
-        numCol = maxNumCol
-        movieCollectionView.reloadData()
-        loading = true
+    func isValidPageNum(_ page: Int) -> Bool{
+        if totalPageNum == nil {
+            return false
+        }
+        return page > 0 && page <= totalPageNum!
     }
     
+    @IBAction func nextPage(_ sender: UIButton) {
+        if isValidPageNum(pageNum + 1) {
+            pageNum += 1
+            //not the initial page
+            if(loading){
+                searchInvoked()
+                pageNumLabel.text = String(pageNum)
+            }
+        }
+    }
+    
+    
+    @IBAction func previousPage(_ sender: UIButton) {
+        if isValidPageNum(pageNum - 1) {
+            pageNum -= 1
+            //not the initial page
+            if(loading){
+                searchInvoked()
+                pageNumLabel.text = String(pageNum)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,28 +247,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
-    func cacheImages() {
-          //URL
-          //Data
-          //UIImage
-        theImageCache = []
-//        print(theData)
-        for item in theData {
-            if let path = item.poster_path{
-                let url = URL(string: "https://image.tmdb.org/t/p/w500" + path)
-//                print(url!)
-                let data = try? Data(contentsOf: url!)
-                let image = UIImage(data: data!)
-                theImageCache.append(image!)
-            }
-            else{
-                let notFound = UIImage(named : "img_not_found")!
-                theImageCache.append(notFound)
-            }
-            
-            
-        }
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         
