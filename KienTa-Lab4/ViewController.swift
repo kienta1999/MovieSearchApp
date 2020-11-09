@@ -34,6 +34,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let numRow = 2
     var numCol = 10
     let maxNumCol = 10
+    var loading = false
+    
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     
@@ -60,7 +62,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let index = indexPath.section * numRow + indexPath.row
         print(theImageCache)
-        if theData.count == 0{
+        if theData.count == 0 && loading{
             let spinner = UIActivityIndicatorView(style: .large)
             spinner.hidesWhenStopped = true
             cell.backgroundView = spinner
@@ -183,6 +185,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         theData = []
         numCol = maxNumCol
         movieCollectionView.reloadData()
+        loading = true
     }
     
     
