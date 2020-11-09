@@ -32,7 +32,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     let numRow = 2
-    let numCol = 10
+    var numCol = 10
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     
@@ -167,8 +167,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 self.fetchMoviesForCollectionView(query)
                 self.cacheImages()
                 DispatchQueue.main.async {
+                    self.numCol = (self.theData.count + 1) / self.numRow
                     self.movieCollectionView.reloadData()
-                    print(self.theImageCache.count)
                 }
             }
             
@@ -178,6 +178,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func clearImageAndData(){
         theImageCache = []
         theData = []
+        numCol = 10
         movieCollectionView.reloadData()
     }
     
