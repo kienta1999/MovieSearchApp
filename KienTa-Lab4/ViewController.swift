@@ -129,15 +129,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let path = "/3/search/movie"
         let queryItem1 = URLQueryItem(name: "api_key", value: "2597d4a74591834f2d63dbe73d13d4fb")
         let queryItem2 = URLQueryItem(name: "query", value: query)
-        let queryItem3 = URLQueryItem(name: "sort_by", value: "popularity.desc")
+//        let queryItem3 = URLQueryItem(name: "sort_by", value: "vote_count.desc")
+        //popularity.desc
         let queryItem4 = URLQueryItem(name: "page", value: String(pageNum) ) // 2 3 for more movies
+//        let queryItem5 = URLQueryItem(name: "lang", value: "en-US")
+        //en-US
 
 
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path
-        urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
+        urlComponents.queryItems = [queryItem1, queryItem2, queryItem4]
 
         if let url = urlComponents.url {
             print(url)

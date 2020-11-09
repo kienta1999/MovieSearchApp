@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC016D83255889C50062111A /* FavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC016D82255889C50062111A /* FavViewController.swift */; };
+		ACDD2D3C2559C3050003EDAD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD2D3B2559C3050003EDAD /* ExploreViewController.swift */; };
 		ACF894C925574D7300E1F403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF894C825574D7300E1F403 /* AppDelegate.swift */; };
 		ACF894CB25574D7300E1F403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF894CA25574D7300E1F403 /* SceneDelegate.swift */; };
 		ACF894CD25574D7300E1F403 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF894CC25574D7300E1F403 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		AC016D82255889C50062111A /* FavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewController.swift; sourceTree = "<group>"; };
+		ACDD2D3B2559C3050003EDAD /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		ACF894C525574D7300E1F403 /* KienTa-Lab4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KienTa-Lab4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF894C825574D7300E1F403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF894CA25574D7300E1F403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				ACF894C825574D7300E1F403 /* AppDelegate.swift */,
 				ACF894CA25574D7300E1F403 /* SceneDelegate.swift */,
 				ACF894CC25574D7300E1F403 /* ViewController.swift */,
+				ACDD2D3B2559C3050003EDAD /* ExploreViewController.swift */,
 				AC016D82255889C50062111A /* FavViewController.swift */,
 				ACF894CE25574D7300E1F403 /* Main.storyboard */,
 				ACF894D125574D7400E1F403 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 			files = (
 				ACF894CD25574D7300E1F403 /* ViewController.swift in Sources */,
 				ACF894C925574D7300E1F403 /* AppDelegate.swift in Sources */,
+				ACDD2D3C2559C3050003EDAD /* ExploreViewController.swift in Sources */,
 				ACF894E3255794F500E1F403 /* DetailedViewController.swift in Sources */,
 				AC016D83255889C50062111A /* FavViewController.swift in Sources */,
 				ACF894CB25574D7300E1F403 /* SceneDelegate.swift in Sources */,
