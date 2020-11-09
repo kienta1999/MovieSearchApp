@@ -30,13 +30,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var theData: [Movie] = []
     var theImageCache: [UIImage] = []
     
+    
     let numRow = 2
     let numCol = 10
-
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     
     @IBOutlet weak var movieQuery: UISearchBar!
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
@@ -57,11 +58,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
         
         let index = indexPath.section * numRow + indexPath.row
-        if(theData.count > index && theImageCache.count > index) {
+        print(theImageCache)
+        if theData.count == 0{
+            let spinner = UIActivityIndicatorView(style: .large)
+            spinner.hidesWhenStopped = true
+            cell.backgroundView = spinner
+            spinner.startAnimating()
+        }
+        else if(theData.count > index && theImageCache.count > index) {
 //            print(index)
             let title = theData[index].title
             let image = theImageCache[index]
-            
+            print(title + " " + image.description)
             let wrapperFrame = CGRect(x: collectionView.frame.minX, y: collectionView.frame.minY, width: collectionView.frame.width, height: collectionView.frame.height)
             let wrapperView = UIView(frame: wrapperFrame)
             cell.backgroundView = wrapperView
@@ -79,9 +87,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             movieTitle.textAlignment = .center
             movieTitle.backgroundColor = .gray
             imageView.addSubview(movieTitle)
-            
-            
-            
         }
         else{
             cell.backgroundView = nil
@@ -132,21 +137,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if let url = urlComponents.url {
             print(url)
             do{
+                theData = []
                 let data = try Data(contentsOf: url)
                 let tempData = try JSONDecoder().decode(APIResults.self, from:data)
                 theData = tempData.results
-    //            print("the data is \(String(describing: theData))")
-//                for i in 0..<theData.count{
-//                    print(i)
-//                    if i == theData.count{
-//                        break
-//                    }
-//    //                print(String(i) + " " + String(theData.count))
-//                    let data = theData[i]
-//                    if data.poster_path == nil{
-//                        theData.remove(at: i)
-//                    }
-//                }
             }
             catch{
                 theData = []
@@ -168,6 +162,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     @IBAction func searchPressed(_ sender: UIButton) {
         if let query = movieQuery.text{
+            clearImageAndData()
             DispatchQueue.global(qos: .userInitiated).async {
                 self.fetchMoviesForCollectionView(query)
                 self.cacheImages()
@@ -179,13 +174,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    func clearImageAndData(){
+        theImageCache = []
+        theData = []
+        movieCollectionView.reloadData()
+    }
     
     
-    
+    /*
+
+             for _ in 0 ..< 20 {
+                 theImageCache.append(UIImage(named: "Loading")!)
+                 theData.append(Movie(id: nil, poster_path: nil, title: "Loading", release_date: "", vote_average: 0, overview: "", vote_count: nil))
+             }
+     //        print(theImageCache)
+             movieCollectionView.reloadData()
+     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         setupCollectionView()
         movieQuery.delegate = self
         

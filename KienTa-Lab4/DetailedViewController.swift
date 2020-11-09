@@ -82,13 +82,13 @@ class DetailedViewController: UIViewController {
         }
         var favMoviesClone:[String] = UserDefaults.standard.array(forKey: self.key)! as? [String] ?? []
         if(favMoviesClone.contains(self.imageName!)){
-            print("duplicate!")
-            print(favMoviesClone)
+//            print("duplicate!")
+//            print(favMoviesClone)
             return
         }
         favMoviesClone.append(self.imageName!)
         UserDefaults.standard.set(favMoviesClone, forKey: self.key)
-        print(favMoviesClone)
+//        print(favMoviesClone)
         
     }
     /*
