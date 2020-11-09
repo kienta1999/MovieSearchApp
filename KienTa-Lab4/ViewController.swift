@@ -33,6 +33,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     let numRow = 2
     var numCol = 10
+    let maxNumCol = 10
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     
@@ -178,7 +179,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func clearImageAndData(){
         theImageCache = []
         theData = []
-        numCol = 10
+        numCol = maxNumCol
         movieCollectionView.reloadData()
     }
     
