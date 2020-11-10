@@ -19,6 +19,7 @@ It is up to user to choose how many vote a movie should have to be displayed. Th
 
 ### a. Seeing more than 20 movies (navigating between pages)
 Seeing only 20 movies may not very sastifying for users. 1 pagl have 20 movies, and user can view the next or previous page (if there exists one) by pressing button Next Page and Previous Page. The associating next/previous 20 movies will show up. This applied to "Explore" tab also. 
+** Please wait for a page to finish loading before navigating to another page. If you do not wait the image and the name will not be in correct position. (if you accidentally do so, then just navigate to another page and come back - you will see the movies get updated to the correct entries).
 ### b. Default page for movie recommendation
 When user first launch the app, they will see a list of popular movies for recommendation. Of course, they can navigate to see more than 20 movies at these default page also 
 
