@@ -258,7 +258,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="cf8-Ja-Kef"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ezd-cc-Qmf"/>
+                    <navigationItem key="navigationItem" id="ezd-cc-Qmf">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="vNQ-VX-b7z">
+                            <connections>
+                                <action selector="clearFavorite:" destination="fDb-gX-2N2" id="Sx8-Ou-Y5Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="favouriteMoviesTable" destination="QUD-gi-XET" id="Cnd-U1-vhw"/>
                     </connections>

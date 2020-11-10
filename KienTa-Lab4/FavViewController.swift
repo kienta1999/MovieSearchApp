@@ -127,6 +127,17 @@ class FavViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
+    @IBAction func clearFavorite(_ sender: UIBarButtonItem) {
+        if UserDefaults.standard.array(forKey: self.keyMovies) != nil{
+            UserDefaults.standard.set([], forKey: self.keyMovies)
+        }
+        if UserDefaults.standard.array(forKey: self.keyID) != nil{
+            UserDefaults.standard.set([], forKey: self.keyID)
+        }
+        favMoviesClone = []
+        favIDClone = []
+        
+    }
     
 
     /*
