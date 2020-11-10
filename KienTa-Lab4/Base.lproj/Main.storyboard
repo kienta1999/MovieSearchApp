@@ -89,11 +89,11 @@
             </objects>
             <point key="canvasLocation" x="2015.2" y="96.059113300492612"/>
         </scene>
-        <!--Movies-->
+        <!--Movies Search-->
         <scene sceneID="AWY-k7-vXi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wD4-M6-6Rh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Movies" image="film" catalog="system" id="5Uz-IL-S7E"/>
+                    <tabBarItem key="tabBarItem" title="Movies Search" image="movies" id="5Uz-IL-S7E"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uFS-eE-TP2">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -221,6 +221,35 @@
             </objects>
             <point key="canvasLocation" x="-942" y="1015"/>
         </scene>
+        <!--Credit-->
+        <scene sceneID="nLr-CQ-rQ5">
+            <objects>
+                <viewController id="cNn-Su-p6S" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ejm-UI-jUF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="theMovieDB" translatesAutoresizingMaskIntoConstraints="NO" id="K4W-ne-Ceb">
+                                <rect key="frame" x="16" y="221" width="343" height="371"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information about movies is from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xr2-bS-zid">
+                                <rect key="frame" x="62" y="192" width="251" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="8iy-vg-3mx"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Credit" image="information" id="JKr-gc-Dc1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkt-j0-LQR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1244" y="81.2807881773399"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ycr-1E-cSw">
             <objects>
@@ -235,6 +264,7 @@
                         <segue destination="wD4-M6-6Rh" kind="relationship" relationship="viewControllers" id="P4k-g2-RFM"/>
                         <segue destination="g5j-Uy-4Ak" kind="relationship" relationship="viewControllers" id="HSn-B0-qqY"/>
                         <segue destination="PNH-bU-OQI" kind="relationship" relationship="viewControllers" id="qoc-H9-sva"/>
+                        <segue destination="cNn-Su-p6S" kind="relationship" relationship="viewControllers" id="VFE-OV-ddN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSk-m8-RSQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -277,7 +307,7 @@
         <scene sceneID="8aD-Ma-0tQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PNH-bU-OQI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="safari" catalog="system" id="s6Q-Kw-yfl"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="search-more" id="s6Q-Kw-yfl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7r2-Ae-3Wh">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -292,11 +322,11 @@
             </objects>
             <point key="canvasLocation" x="55" y="1015"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Favorite-->
         <scene sceneID="QQL-ZU-Qzx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g5j-Uy-4Ak" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="wXw-Es-TVC"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="favorite" selectedImage="favorite" id="wXw-Es-TVC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RAv-iN-8Rj">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -313,7 +343,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="film" catalog="system" width="128" height="93"/>
-        <image name="safari" catalog="system" width="128" height="121"/>
+        <image name="favorite" width="24" height="24"/>
+        <image name="information" width="24" height="24"/>
+        <image name="movies" width="24" height="24"/>
+        <image name="search-more" width="24" height="24"/>
+        <image name="theMovieDB" width="75" height="75"/>
     </resources>
 </document>
