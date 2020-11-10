@@ -11,11 +11,13 @@
       "size" : "20x20"
     },
     {
+      "filename" : "app-icon.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "Webp.net-resizeimage.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"

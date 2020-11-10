@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DR4-Ys-ol8">
-                                <rect key="frame" x="0.0" y="159" width="375" height="540"/>
+                                <rect key="frame" x="0.0" y="126" width="375" height="573"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gG1-I8-B5O">
@@ -137,30 +137,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyd-qs-Bvb">
-                                <rect key="frame" x="194" y="88" width="40" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Score"/>
-                                <connections>
-                                    <action selector="sortByScore:" destination="sRZ-0L-7gq" eventType="touchUpInside" id="XsV-Ce-4hg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTc-fc-A6j">
-                                <rect key="frame" x="111" y="88" width="33" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Date"/>
-                                <connections>
-                                    <action selector="sortByDate:" destination="sRZ-0L-7gq" eventType="touchUpInside" id="sB2-CX-BFD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzJ-zq-oMG">
-                                <rect key="frame" x="282" y="88" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Vote Count"/>
-                                <connections>
-                                    <action selector="sortByVoteCount:" destination="sRZ-0L-7gq" eventType="touchUpInside" id="pBq-AC-ZYe"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qly-tY-FBG">
                                 <rect key="frame" x="288" y="704" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -185,32 +161,49 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vote count lowerbound - default 5000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRy-pv-LkA">
-                                <rect key="frame" x="2" y="117" width="296" height="34"/>
+                                <rect key="frame" x="0.0" y="88" width="296" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zdr-vE-q5j">
-                                <rect key="frame" x="306" y="119" width="53" height="30"/>
+                                <rect key="frame" x="306" y="88" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Change"/>
                                 <connections>
                                     <action selector="changeVoteCount:" destination="sRZ-0L-7gq" eventType="touchUpInside" id="dIo-P5-8gd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Nh-wn-crJ">
-                                <rect key="frame" x="2" y="88" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Popularity"/>
-                                <connections>
-                                    <action selector="sortByPupularity:" destination="sRZ-0L-7gq" eventType="touchUpInside" id="5Xb-rC-6iP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hEm-YY-di1"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qKp-MF-zUz"/>
+                    <navigationItem key="navigationItem" id="qKp-MF-zUz">
+                        <leftBarButtonItems>
+                            <barButtonItem title="Popularity" id="Vj4-x5-sP2">
+                                <connections>
+                                    <action selector="sortByPupularity:" destination="sRZ-0L-7gq" id="ZsK-wB-ZxU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Date" id="Ckg-i4-cKJ">
+                                <connections>
+                                    <action selector="sortByDate:" destination="sRZ-0L-7gq" id="87T-c9-wcb"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Vote Count" id="uBk-IL-99H">
+                                <connections>
+                                    <action selector="sortByVoteCount:" destination="sRZ-0L-7gq" id="Yxw-AY-Ojd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Score" id="WZd-VI-p28">
+                                <connections>
+                                    <action selector="sortByScore:" destination="sRZ-0L-7gq" id="B5K-SX-KDk"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="minVoteCountTextField" destination="gRy-pv-LkA" id="hHe-XJ-lPA"/>
                         <outlet property="movieCollectionView" destination="DR4-Ys-ol8" id="1R0-tK-caO"/>
@@ -219,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qmn-WK-p04" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-942" y="1015"/>
+            <point key="canvasLocation" x="-943.20000000000005" y="1014.5320197044335"/>
         </scene>
         <!--Credit-->
         <scene sceneID="nLr-CQ-rQ5">

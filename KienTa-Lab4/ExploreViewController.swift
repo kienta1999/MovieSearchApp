@@ -197,24 +197,24 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
     }
 
     
-    @IBAction func sortByPupularity(_ sender: UIButton) {
+    @IBAction func sortByPupularity(_ sender: UIBarButtonItem) {
         querySort = "popularity.desc"
         searchInvoked()
     }
     
     
-    @IBAction func sortByScore(_ sender: UIButton) {
+    @IBAction func sortByScore(_ sender: UIBarButtonItem) {
         querySort = "vote_average.desc"
         searchInvoked()
     }
     
     
-    @IBAction func sortByDate(_ sender: UIButton) {
+    @IBAction func sortByDate(_ sender: UIBarButtonItem) {
         querySort = "release_date.desc"
         searchInvoked()
     }
     
-    @IBAction func sortByVoteCount(_ sender: Any) {
+    @IBAction func sortByVoteCount(_ sender: UIBarButtonItem) {
         querySort = "vote_count.desc"
         searchInvoked()
     }
@@ -254,6 +254,7 @@ class ExploreViewController: UIViewController , UICollectionViewDataSource, UICo
     }
     
     override func viewDidLoad() {
+        self.title = "Sort by"
         super.viewDidLoad()
         setupCollectionView()
         // Do any additional setup after loading the view.
