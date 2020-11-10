@@ -18,7 +18,8 @@ class DetailedViewController: UIViewController {
     var numRate: Int!
     var id: Int!
     
-    let key = "favouriteMovies"
+    let keyMovies = "favouriteMovies"
+    let keyID = "favouriteID"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class DetailedViewController: UIViewController {
             navigationController?.popViewController(animated: true)
             return
         }
+        self.title = imageName
         let imageRatio = CGFloat(2)
         
         let theImageFrame = CGRect(x: view.frame.midX - image.size.width / imageRatio / 2 , y: 100, width: image.size.width / imageRatio, height: image.size.height / imageRatio)
@@ -80,26 +82,27 @@ class DetailedViewController: UIViewController {
     @objc func addFavClicked(){
         print("fav clicked")
         
-        if UserDefaults.standard.array(forKey: self.key) == nil{
-            UserDefaults.standard.set([], forKey: self.key)
+        if UserDefaults.standard.array(forKey: self.keyMovies) == nil{
+            UserDefaults.standard.set([], forKey: self.keyMovies)
         }
-        var favMoviesClone:[String] = UserDefaults.standard.array(forKey: self.key)! as? [String] ?? []
-        if(favMoviesClone.contains(self.imageName!)){
+        if UserDefaults.standard.array(forKey: self.keyID) == nil{
+            UserDefaults.standard.set([], forKey: self.keyID)
+        }
+        var favMoviesClone:[String] = UserDefaults.standard.array(forKey: self.keyMovies)! as? [String] ?? []
+        var favIDClone:[Int] = UserDefaults.standard.array(forKey: self.keyID)! as? [Int] ?? []
+        if(favIDClone.contains(self.id!)){
 //            print("duplicate!")
 //            print(favMoviesClone)
             return
         }
         favMoviesClone.append(self.imageName!)
-        UserDefaults.standard.set(favMoviesClone, forKey: self.key)
+        favIDClone.append(self.id!)
+        UserDefaults.standard.set(favMoviesClone, forKey: self.keyMovies)
+        UserDefaults.standard.set(favIDClone, forKey: self.keyID)
 //        print(favMoviesClone)
         
     }
     
-    func fetchMoreInfor(){
-        if(id != nil){
-            
-        }
-    }
     /*
     // MARK: - Navigation
 
