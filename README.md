@@ -1,6 +1,14 @@
 # MovieSearchApp
 Movie Search app using navigation bars, tab bars, and collection views, and remote API
 
+# Basic functionality
+
+A movie-searching app, which allows users to find information about movies. Data is pulled from The Movie Database’s (TMDb) API (http://www.themoviedb.org).  
+- User can search for movies and see the results populated in a collection view.  
+- Select one movie will pop up a new ViewController with more details about the movie.  
+- User can add movie to favourite list.  
+- Favourite movies are stored in user default.  
+
 # Creative explain: 
 
 ## 1. Sort by tab bar
@@ -32,3 +40,17 @@ User can tap in the table cell that holds the movie and see the movie's details 
 ### b. Clear all favourite movies
 There is a clear button in navigation bar that allows user to delete all favourite movies.
 
+
+# Demo
+
+## Movie search
+![](demo/movie_search)
+
+## Favourite list
+![](demo/favorite_list)
+
+## Movie details
+![](demo/movie_detail)
+
+## Movie sort
+![](demo/movies_sort)
