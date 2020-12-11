@@ -44,13 +44,13 @@ There is a clear button in navigation bar that allows user to delete all favouri
 # Demo
 
 ## Movie search
-![](demo/movie_search.png width="50")
+<img src="demo/movie_search.png" width="250">
 
 ## Favourite list
-![](demo/favorite_list.png width="50")
+<img src="demo/favorite_list.png" width="250">
 
 ## Movie details
-![](demo/movie_detail.png width="50")
+<img src="demo/movie_search.png" width="250">
 
 ## Movie sort
-![](demo/movies_sort.png width="50")
+<img src="demo/movie_search.png" width="250">
