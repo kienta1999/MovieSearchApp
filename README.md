@@ -53,4 +53,4 @@ There is a clear button in navigation bar that allows user to delete all favouri
 <img src="demo/movie_detail.png" width="250">
 
 ## Movie sort
-<img src="demo/movie_sort.png" width="250">
+<img src="demo/movies_sort.png" width="250">
